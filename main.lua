@@ -110,7 +110,7 @@ end)
 
 client:on('messageCreate', function(message)
   print(message.timestamp.. ' <'.. message.author.name.. '> '.. message.content) --Screen output
-  if message.author.id ~= '254952649923887104' then --If not himself
+  if message.author.id ~= client.user.id then --If not himself
     msg = message
     if string.match(msg.content, 'audio.play ') then
       connection = channel:join()
