@@ -12,6 +12,11 @@ local channel
 local playingURL = ''
 local playingTrack = 0
 
+if not args[2] then
+  print("Please specify a token.")
+  os.exit()
+end
+
 local function getStream(url)
 
   local child = spawn('youtube-dl', {
@@ -135,4 +140,4 @@ client:on('messageCreate', function(message)
   end
 end)
 
-client:run('TOKEN_GOES_HERE')
+client:run(args[2])
