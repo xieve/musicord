@@ -109,20 +109,20 @@ client:on('ready', function()
 end)
 
 client:on('messageCreate', function(message)
-  print(message.timestamp.. ' <'.. message.author.name.. '> '.. message.content) --Screen output
+  print(os.date('!%Y-%m-%d %H:%M:%S', message.createdAt).. ' <'.. message.author.name.. '> '.. message.content) --Screen output
   if message.author.id ~= client.user.id then --If not himself
     msg = message
-    if string.match(msg.content, 'audio.play ') then
+    if string.find(msg.content, 'audio%.play ') then
       connection = channel:join()
       if connection then
         print('connected')
-        playingURL = string.gsub(msg.content, 'audio.play ', '')
+        playingURL = string.gsub(msg.content, 'audio%.play ', '')
         local stream = getStream(playingURL) -- URL goes here
         print('playing')
         connection:playFile(stream)
       end
-    elseif string.match(msg.content, 'audio.playlist ') then
-      playingURL = string.gsub(msg.content, 'audio.playlist ', '')
+    elseif string.find(msg.content, 'audio%.playlist ') then
+      playingURL = string.gsub(msg.content, 'audio%.playlist ', '')
       streamPlaylist(playingURL, 2)
     elseif msg.content == 'audio.pause' then
       connection:pauseStream(playingURL)
